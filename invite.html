@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WariPay に参加する</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif; background: #f5f0eb; color: #2c2c2c; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+    .card { background: white; border-radius: 20px; padding: 40px 32px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .icon { font-size: 3rem; margin-bottom: 16px; }
+    h1 { font-size: 1.4rem; font-weight: 700; color: #2c2c2c; margin-bottom: 8px; }
+    .subtitle { font-size: 0.9rem; color: #888; margin-bottom: 28px; line-height: 1.6; }
+    .code-box { background: #f5f0eb; border-radius: 12px; padding: 16px; margin-bottom: 28px; }
+    .code-label { font-size: 0.75rem; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .code { font-size: 1.6rem; font-weight: 700; color: #5a7a5a; letter-spacing: 0.15em; font-family: monospace; }
+    .btn-open { display: block; background: #5a7a5a; color: white; border-radius: 14px; padding: 16px; font-size: 1rem; font-weight: 600; text-decoration: none; margin-bottom: 12px; }
+    .btn-open:active { opacity: 0.8; }
+    .note { font-size: 0.8rem; color: #aaa; line-height: 1.6; margin-top: 20px; }
+    .divider { border: none; border-top: 1px solid #eee; margin: 20px 0; }
+    .store-link { display: inline-block; margin-top: 8px; }
+    .store-link img { height: 40px; }
+  </style>
+  <script>
+    function getCode() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('code') || '';
+    }
+    function openApp() {
+      const code = getCode();
+      window.location.href = 'warikan://invite/' + code;
+      setTimeout(function() {
+        window.location.href = 'https://apps.apple.com/jp/app/id6746448701';
+      }, 1500);
+    }
+    window.onload = function() {
+      const code = getCode();
+      if (code) {
+        document.getElementById('invite-code').textContent = code;
+        document.getElementById('open-btn').href = 'warikan://invite/' + code;
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">💰</div>
+    <h1>WariPayに招待されました</h1>
+    <p class="subtitle">割り勘・精算管理アプリ WariPay で<br>グループの精算に参加しよう</p>
+
+    <div class="code-box">
+      <div class="code-label">招待コード</div>
+      <div class="code" id="invite-code">------</div>
+    </div>
+
+    <a class="btn-open" id="open-btn" href="#" onclick="openApp(); return false;">
+      📲 アプリで開く
+    </a>
+
+    <p class="note">WariPayアプリがインストールされていない場合は<br>App Storeに移動します</p>
+
+    <hr class="divider">
+
+    <p style="font-size:0.8rem; color:#aaa;">アプリをお持ちの方は「コードで参加」から<br>上記の招待コードを入力しても参加できます</p>
+  </div>
+</body>
+</html>
